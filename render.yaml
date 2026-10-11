@@ -1,0 +1,23 @@
+# Blueprint for https://render.com (New → Blueprint → pick this repo).
+# Builds the backend straight from its GitHub repo using its Dockerfile.
+# Replace YOUR_GITHUB_USERNAME before deploying.
+services:
+  - type: web
+    name: uniconnect-backend
+    runtime: docker
+    repo: https://github.com/YOUR_GITHUB_USERNAME/uniconnect-backend
+    branch: main
+    plan: free
+    healthCheckPath: /api/health
+    envVars:
+      - key: JWT_SECRET
+        generateValue: true
+      - key: CORS_ORIGINS
+        value: https://YOUR_GITHUB_USERNAME.github.io
+      # For persistent data, create a free PostgreSQL on Render (or Neon/Supabase) and add:
+      # - key: DB_URL
+      #   value: jdbc:postgresql://HOST:5432/DBNAME
+      # - key: DB_USER
+      #   value: USER
+      # - key: DB_PASSWORD
+      #   sync: false

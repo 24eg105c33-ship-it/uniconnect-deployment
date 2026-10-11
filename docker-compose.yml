@@ -1,0 +1,26 @@
+# Local full-stack run with PostgreSQL: docker compose up --build
+# Expects the backend repo cloned next to this one as ../uniconnect-backend
+services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: uniconnect
+      POSTGRES_USER: uniconnect
+      POSTGRES_PASSWORD: uniconnect
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  backend:
+    build: ../uniconnect-backend
+    depends_on: [db]
+    environment:
+      DB_URL: jdbc:postgresql://db:5432/uniconnect
+      DB_USER: uniconnect
+      DB_PASSWORD: uniconnect
+      JWT_SECRET: local-dev-secret-local-dev-secret-1234
+      CORS_ORIGINS: http://localhost:*
+    ports:
+      - "8080:8080"
+
+volumes:
+  pgdata:
