@@ -5,7 +5,7 @@ services:
   - type: web
     name: uniconnect-backend
     runtime: docker
-    repo: https://github.com/YOUR_GITHUB_USERNAME/uniconnect-backend
+    repo: https://github.com/24eg105c33-ship-it/uniconnect-backend
     branch: main
     plan: free
     healthCheckPath: /api/health
@@ -13,7 +13,7 @@ services:
       - key: JWT_SECRET
         generateValue: true
       - key: CORS_ORIGINS
-        value: https://YOUR_GITHUB_USERNAME.github.io
+        value: https://24eg105c33-ship-it.github.io
       # For persistent data, create a free PostgreSQL on Render (or Neon/Supabase) and add:
       # - key: DB_URL
       #   value: jdbc:postgresql://HOST:5432/DBNAME
